@@ -1,6 +1,6 @@
 // Translation API service - connects to FastAPI backend
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://ifu-translator.azurewebsites.net";
 
 export interface Segment {
   id: number;
