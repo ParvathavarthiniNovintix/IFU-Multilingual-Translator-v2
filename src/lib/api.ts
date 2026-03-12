@@ -40,7 +40,7 @@ export async function uploadDocument(file: File): Promise<Segment[]> {
   return data.segments;
 }
 
-/** Translate segments using NLLB-200 model */
+/** Translate segments using openai.gpt-oss-120b-1:0 model */
 export async function translateSegments(
   segments: Segment[],
   targetLang: string,

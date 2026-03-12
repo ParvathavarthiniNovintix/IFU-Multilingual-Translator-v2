@@ -8,8 +8,46 @@ import { SegmentViewer } from "@/components/doc-translation/SegmentViewer";
 import { Progress } from "@/components/ui/progress";
 
 const LANGUAGES = [
-  "French", "German", "Spanish", "Japanese", "Chinese", "Korean",
-  "Portuguese", "Italian", "Russian", "Arabic", "Dutch", "Finnish",
+  { code: "en", name: "English" },
+  { code: "pl", name: "Polish" },
+  { code: "bg", name: "Bulgarian" },
+  { code: "pt", name: "Portuguese" },
+  { code: "cs", name: "Czech" },
+  { code: "ro", name: "Romanian" },
+  { code: "da", name: "Danish" },
+  { code: "ru", name: "Russian" },
+  { code: "de", name: "German" },
+  { code: "sk", name: "Slovak" },
+  { code: "el", name: "Greek" },
+  { code: "sl", name: "Slovenian" },
+  { code: "es", name: "Spanish" },
+  { code: "sr", name: "Serbian" },
+  { code: "et", name: "Estonian" },
+  { code: "sv", name: "Swedish" },
+  { code: "fi", name: "Finnish" },
+  { code: "tr", name: "Turkish" },
+  { code: "fr", name: "French" },
+  { code: "vi", name: "Vietnamese" },
+  { code: "hr", name: "Croatian" },
+  { code: "ga", name: "Irish" },
+  { code: "hu", name: "Hungarian" },
+  { code: "mt", name: "Maltese" },
+  { code: "id", name: "Indonesian" },
+  { code: "it", name: "Italian" },
+  { code: "is", name: "Icelandic" },
+  { code: "zh", name: "Chinese" },
+  { code: "kk", name: "Kazakh" },
+  { code: "zh-CN", name: "Chinese Simplified" },
+  { code: "lt", name: "Lithuanian" },
+  { code: "zh-TW", name: "Chinese Traditional" },
+  { code: "lv", name: "Latvian" },
+  { code: "ja", name: "Japanese" },
+  { code: "nl", name: "Dutch" },
+  { code: "ko", name: "Korean" },
+  { code: "no", name: "Norwegian" },
+  { code: "th", name: "Thai" },
+  { code: "ar", name: "Arabic" },
+  { code: "ms", name: "Malay" },
 ];
 
 const DocTranslationPage = () => {
@@ -119,15 +157,9 @@ const DocTranslationPage = () => {
           >
             <option value="">Select language</option>
             {LANGUAGES.map((l) => (
-              <option key={l}>{l}</option>
+              <option key={l.code} value={l.code}>{l.name}</option>
             ))}
           </select>
-        </div>
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-muted-foreground">Model</label>
-          <div className="block w-44 rounded-md border bg-muted px-3 py-2 text-sm text-muted-foreground">
-            Translation Engine
-          </div>
         </div>
         <Button
           onClick={handleTranslate}

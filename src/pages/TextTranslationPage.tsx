@@ -1,10 +1,51 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const LANGUAGES = ["English", "Japanese", "German", "French", "Spanish", "Chinese", "Korean", "Portuguese"];
+const LANGUAGES = [
+  { code: "en", name: "English" },
+  { code: "pl", name: "Polish" },
+  { code: "bg", name: "Bulgarian" },
+  { code: "pt", name: "Portuguese" },
+  { code: "cs", name: "Czech" },
+  { code: "ro", name: "Romanian" },
+  { code: "da", name: "Danish" },
+  { code: "ru", name: "Russian" },
+  { code: "de", name: "German" },
+  { code: "sk", name: "Slovak" },
+  { code: "el", name: "Greek" },
+  { code: "sl", name: "Slovenian" },
+  { code: "es", name: "Spanish" },
+  { code: "sr", name: "Serbian" },
+  { code: "et", name: "Estonian" },
+  { code: "sv", name: "Swedish" },
+  { code: "fi", name: "Finnish" },
+  { code: "tr", name: "Turkish" },
+  { code: "fr", name: "French" },
+  { code: "vi", name: "Vietnamese" },
+  { code: "hr", name: "Croatian" },
+  { code: "ga", name: "Irish" },
+  { code: "hu", name: "Hungarian" },
+  { code: "mt", name: "Maltese" },
+  { code: "id", name: "Indonesian" },
+  { code: "it", name: "Italian" },
+  { code: "is", name: "Icelandic" },
+  { code: "zh", name: "Chinese" },
+  { code: "kk", name: "Kazakh" },
+  { code: "zh-CN", name: "Chinese Simplified" },
+  { code: "lt", name: "Lithuanian" },
+  { code: "zh-TW", name: "Chinese Traditional" },
+  { code: "lv", name: "Latvian" },
+  { code: "ja", name: "Japanese" },
+  { code: "nl", name: "Dutch" },
+  { code: "ko", name: "Korean" },
+  { code: "no", name: "Norwegian" },
+  { code: "th", name: "Thai" },
+  { code: "ar", name: "Arabic" },
+  { code: "ms", name: "Malay" },
+];
 
 const TextTranslationPage = () => {
-  const [sourceLang, setSourceLang] = useState("English");
+  const [sourceLang, setSourceLang] = useState("en");
   const [targetLang, setTargetLang] = useState("");
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
@@ -32,7 +73,7 @@ const TextTranslationPage = () => {
             onChange={(e) => setSourceLang(e.target.value)}
             className="block w-44 rounded-md border bg-background px-3 py-2 text-sm text-foreground"
           >
-            {LANGUAGES.map((l) => <option key={l}>{l}</option>)}
+            {LANGUAGES.map((l) => <option key={l.code} value={l.code}>{l.name}</option>)}
           </select>
         </div>
         <div className="text-muted-foreground text-lg pb-2">→</div>
@@ -44,7 +85,7 @@ const TextTranslationPage = () => {
             className="block w-44 rounded-md border bg-background px-3 py-2 text-sm text-foreground"
           >
             <option value="">Please select</option>
-            {LANGUAGES.filter((l) => l !== sourceLang).map((l) => <option key={l}>{l}</option>)}
+            {LANGUAGES.filter((l) => l.code !== sourceLang).map((l) => <option key={l.code} value={l.code}>{l.name}</option>)}
           </select>
         </div>
         <Button onClick={handleTranslate} disabled={translating || !targetLang || !inputText.trim()}>
