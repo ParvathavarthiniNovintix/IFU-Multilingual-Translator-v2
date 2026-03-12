@@ -1,6 +1,7 @@
 // Translation API service - connects to FastAPI backend
+// Use environment variable VITE_API_URL to override the default backend
 
-const BASE_URL = "https://ifu-translator.azurewebsites.net";
+const BASE_URL = import.meta.env.VITE_API_URL || "https://ifu-translator.azurewebsites.net";
 
 export interface Segment {
   id: number;
@@ -61,7 +62,14 @@ export async function translateSegments(
   });
 
   if (!response.ok) {
-    throw new Error(`Translation failed: ${response.statusText}`);
+    let errorMessage = response.statusText;
+    try {
+      const errorData = await response.json();
+      errorMessage = errorData.detail || errorData.message || JSON.stringify(errorData);
+    } catch {
+      // Response wasn't JSON, use status text
+    }
+    throw new Error(`Translation failed: ${errorMessage}`);
   }
 
   const data = await response.json();
