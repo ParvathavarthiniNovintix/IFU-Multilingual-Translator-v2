@@ -93,16 +93,25 @@ const DocTranslationPage = () => {
   };
 
   const handleTranslate = async () => {
-    if (!targetLang || segments.length === 0 || !uploadedFile) return;
+    console.log("Translate clicked", { targetLang, segmentsLength: segments.length, hasFile: !!uploadedFile });
+    if (!targetLang || segments.length === 0 || !uploadedFile) {
+      console.log("Translate blocked - missing params");
+      return;
+    }
     setTranslating(true);
     setProgress({ done: 0, total: segments.length });
     setActiveTab("translated");
 
     try {
+      console.log("Calling translateSegments API...");
       const result = await translateSegments(segments, targetLang, uploadedFile, (done, total) => {
         setProgress({ done, total });
       });
+      console.log("Translation result:", result);
       setTranslated(result);
+    } catch (error) {
+      console.error("Translation error:", error);
+      alert("Translation failed: " + (error as Error).message);
     } finally {
       setTranslating(false);
     }
